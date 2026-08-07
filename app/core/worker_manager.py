@@ -1,4 +1,6 @@
 from app.models.worker import Worker
+from app.services.worker_workspace import WorkerWorkspace
+from app.engines.worker_engine import WorkerEngine
 
 
 class WorkerManager:
@@ -6,14 +8,16 @@ class WorkerManager:
     def __init__(self):
 
         self.workers = []
+        self.workspace = WorkerWorkspace()
+        self.engine = WorkerEngine()
 
-    def create_workers(self, tasks):
+    def create_workers(self, project):
 
         print("\n[Worker Manager] Creating workers...")
 
         self.workers = []
 
-        for index, task in enumerate(tasks, start=1):
+        for index, task in enumerate(project.tasks, start=1):
 
             worker = Worker(
                 id=index,
@@ -22,6 +26,11 @@ class WorkerManager:
             )
 
             self.workers.append(worker)
+
+            self.workspace.create(
+                project.id,
+                worker
+            )
 
             print(f"\nWorker {worker.id} created.")
             print(f"Role   : {worker.role}")
@@ -39,7 +48,7 @@ class WorkerManager:
 
             worker.status = "Working"
 
-            worker.result = f"{worker.role} completed."
+            worker.result = self.engine.run(worker)
 
             worker.status = "Completed"
 

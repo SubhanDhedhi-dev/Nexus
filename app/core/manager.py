@@ -84,15 +84,13 @@ class Manager:
     def create_workers(self):
 
         workers = self.worker_manager.create_workers(
-            self.current_project.tasks
+        self.current_project
         )
 
         self.current_project.workers = workers
 
-        self.event_bus.emit(
-            "PROJECT_UPDATED",
-            self.current_project
-        )
+        self.workspace.save(self.current_project)
+
 
     def assign_tasks(self):
 
