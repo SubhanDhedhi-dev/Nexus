@@ -1,0 +1,29 @@
+{
+    "id": "29469149",
+    "name": "Untitled Project",
+    "request": "Build me a portfolio website",
+    "status": "Completed",
+    "created_at": "2026-08-07 21:36:13.855253",
+    "updated_at": "2026-08-07 21:36:13.969404",
+    "tasks": [
+        {
+            "title": "HTML",
+            "description": "Create the HTML structure.",
+            "status": "Pending"
+        },
+        {
+            "title": "CSS",
+            "description": "Style the website.",
+            "status": "Pending"
+        },
+        {
+            "title": "JavaScript",
+            "description": "Add interactivity.",
+            "status": "Pending"
+        }
+    ],
+    "workers": [],
+    "files": [],
+    "logs": [],
+    "memory": {}
+}

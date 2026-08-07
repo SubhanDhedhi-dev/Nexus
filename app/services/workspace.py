@@ -1,36 +1,37 @@
 from pathlib import Path
-import json
 from dataclasses import asdict
-from datetime import datetime
+import json
 
 
 class Workspace:
 
     def __init__(self):
-
         self.projects_folder = Path("projects")
         self.projects_folder.mkdir(exist_ok=True)
 
-    def create_project(self, project):
+    def create(self, project):
 
-        project_folder = self.projects_folder / project.id
+        project_path = self.projects_folder / project.id
 
-        project_folder.mkdir(exist_ok=True)
+        project_path.mkdir(exist_ok=True)
 
-        (project_folder / "workers").mkdir(exist_ok=True)
-        (project_folder / "memory").mkdir(exist_ok=True)
-        (project_folder / "logs").mkdir(exist_ok=True)
-        (project_folder / "final").mkdir(exist_ok=True)
+        (project_path / "workers").mkdir(exist_ok=True)
+        (project_path / "memory").mkdir(exist_ok=True)
+        (project_path / "logs").mkdir(exist_ok=True)
+        (project_path / "output").mkdir(exist_ok=True)
 
-        data = asdict(project)
+        self.save(project)
 
-        data["created_at"] = project.created_at.isoformat()
-        data["updated_at"] = project.updated_at.isoformat()
+        return project_path
 
-        with open(project_folder / "project.json", "w", encoding="utf-8") as file:
+    def save(self, project):
 
-            json.dump(data, file, indent=4)
+        project_path = self.projects_folder / project.id
 
-        print(f"[Workspace] Project created at: {project_folder}")
-
-        return project_folder
+        with open(project_path / "project.json", "w") as file:
+            json.dump(
+                asdict(project),
+                file,
+                indent=4,
+                default=str
+            )
