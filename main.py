@@ -1,37 +1,12 @@
-from app.core.manager import Manager
+from app.agents.manager import Manager
 
 
 def main():
+    request = "Build me a portfolio website"
 
     manager = Manager()
 
-    manager.receive_request("Build me a portfolio website")
-
-    print("\nCurrent Project")
-    print("-" * 40)
-    print(manager.current_project)
-
-    manager.plan()
-
-    print("\nTasks")
-    print("-" * 40)
-
-    for task in manager.current_project.tasks:
-        print(task)
-
-    print()
-
-    manager.create_workers()
-
-    manager.assign_tasks()
-
-    manager.collect_results()
-
-    manager.finish()
-
-    print("\nFinal Project")
-    print("-" * 40)
-    print(manager.current_project)
+    manager.run(request)
 
 
 if __name__ == "__main__":

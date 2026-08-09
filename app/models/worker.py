@@ -1,15 +1,33 @@
-from dataclasses import dataclass
-
-
-@dataclass
 class Worker:
+    """
+    Represents a worker responsible for completing one task.
+    """
 
-    id: int
+    def __init__(
+        self,
+        id: int,
+        role: str,
+        mission: str,
+        status: str = "Pending",
+        result: str = ""
+    ):
+        self.id = id
+        self.role = role
+        self.mission = mission
+        self.status = status
+        self.result = result
 
-    role: str
+        self.output_file = None
+        self.output_content = None
 
-    mission: str
+    def __repr__(self):
 
-    status: str = "Idle"
-
-    result: str = ""
+        return (
+            f"Worker("
+            f"id={self.id}, "
+            f"role='{self.role}', "
+            f"mission='{self.mission}', "
+            f"status='{self.status}', "
+            f"result='{self.result}'"
+            f")"
+        )

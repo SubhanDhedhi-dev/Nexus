@@ -1,5 +1,5 @@
 from app.models.task import Task
-from app.core.model_manager import ModelManager
+from app.ai.model_manager import ModelManager
 
 
 class Planner:
@@ -23,15 +23,15 @@ Break the project into tasks.
 
         ai_response = self.model_manager.generate(prompt)
 
-        print("\nPlanner AI Response")
-        print("-------------------")
+        print("\n## Planner AI Response")
+        print("---------------------")
         print(ai_response)
 
-        request = request.lower()
+        request_lower = request.lower()
 
         tasks = []
 
-        if "website" in request:
+        if "website" in request_lower:
 
             tasks.append(
                 Task(
